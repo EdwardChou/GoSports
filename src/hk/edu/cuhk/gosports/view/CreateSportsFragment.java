@@ -122,6 +122,7 @@ public class CreateSportsFragment extends BaseFragment implements Notify {
 				.findViewById(R.id.fragment_create_sports_type_btn);
 		timeButton = (Button) v
 				.findViewById(R.id.fragment_create_sports_time_btn);
+		timeButton.setText(TimeUtil.transferDateToString(new Date()));
 		locButton = (Button) v
 				.findViewById(R.id.fragment_create_sports_loc_btn);
 		if (SportsFragment.latestNewMarker != null) {
@@ -151,7 +152,6 @@ public class CreateSportsFragment extends BaseFragment implements Notify {
 	public void refresh(Object... params) {
 		Messager msg = (Messager) params[0];
 		if (msg != null) {
-			Log.e(TAG, "receive CreateSportsFragment=============" + msg.getType());
 			if (msg.getType() == Task.DONE_SELECT_LOC) {
 				if (SportsFragment.latestNewMarker != null) {
 					locButton.setVisibility(View.GONE);
@@ -183,8 +183,7 @@ public class CreateSportsFragment extends BaseFragment implements Notify {
 						.toString()));
 				sport.setEventTitle(titleEditText.getText().toString() != null ? titleEditText
 						.getText().toString() : "");
-				// FIXME change titleEditText-->remarksEditText
-				sport.setExtraInfo(titleEditText.getText().toString() != null ? titleEditText
+				sport.setExtraInfo(remarksEditText.getText().toString() != null ? remarksEditText
 						.getText().toString() : "");
 				sport.setStartTime("Now"
 						.equals(timeButton.getText().toString()) ? TimeUtil
@@ -192,15 +191,14 @@ public class CreateSportsFragment extends BaseFragment implements Notify {
 						.getText().toString());
 				sport.setLocation(locEditText.getText().toString() != null ? locEditText
 						.getText().toString() : "");
-				sport.setLongitude(SportsFragment.latestNewMarker
-						.getPosition().longitude);
-				sport.setLatitude(SportsFragment.latestNewMarker
-						.getPosition().latitude);
+				sport.setLongitude(SportsFragment.latestNewMarker.getPosition().longitude);
+				sport.setLatitude(SportsFragment.latestNewMarker.getPosition().latitude);
 				para.put("sport", sport);
 				if (mBound) {
 					MainService.addActivity(CreateSportsFragment.this);
 					MainService.addNewTask(new Task(
-							Task.DONE_ADD_NEW_SPORT_TO_SERVER, para, getContext()));
+							Task.DONE_ADD_NEW_SPORT_TO_SERVER, para,
+							getContext()));
 				}
 			}
 		}
@@ -257,7 +255,5 @@ public class CreateSportsFragment extends BaseFragment implements Notify {
 			}
 		}
 	}
-
-
 
 }
