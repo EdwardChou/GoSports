@@ -1,0 +1,30 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- common -->
+    <dimen name="dp_large_size">15dp</dimen>
+    <dimen name="dp_middle_size">10dp</dimen>
+    <dimen name="dp_small_size">5dp</dimen>
+    <dimen name="dp_normal_large_size">12dp</dimen>
+    <dimen name="dp_normal_middle_size">8dp</dimen>
+    <dimen name="dp_normal_small_size">4dp</dimen>
+    <dimen name="dp_unit">1dp</dimen>
+    <dimen name="dp_unit_small">2dp</dimen>
+    <dimen name="dp_unit_middle">3dp</dimen>
+
+    <!-- font size -->
+    <dimen name="font_xlarge">22sp</dimen>
+    <dimen name="font_large">20sp</dimen>
+    <dimen name="font_normal">18sp</dimen>
+    <dimen name="font_middle">14sp</dimen>
+    <dimen name="font_small">12sp</dimen>
+
+    <!-- slidding menu -->
+    <dimen name="slidingmenu_offset">145dp</dimen>
+    <dimen name="list_padding">10dp</dimen>
+    <dimen name="shadow_width">10dp</dimen>
+
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <drawable name="main_bg_gray">#E5E5E5</drawable>
+    <drawable name="soft_blue">#5399BE</drawable>
+    <drawable name="deep_blue">#5399BE</drawable>
+    <drawable name="white">#FFFFFF</drawable>
+    <drawable name="soft_black">#999999</drawable>
+    <drawable name="dark_black">#444444</drawable>
+    <drawable name="blue">#0583FF</drawable>
+
+    <color name="dialog_btn_pressed">#dddddd</color>
+
+</resources>

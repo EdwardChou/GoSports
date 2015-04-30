@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F0EFED"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:text="确定要退出吗？"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DBD8D3" />
+
+    <!-- </RadioGroup> -->
+
+    <LinearLayout
+        android:id="@+id/app_exit_btns_li"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/app_exit_cancel_btn"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:background="#F0EFED"
+            android:text="取消"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="@dimen/dp_unit"
+            android:layout_height="match_parent"
+            android:background="#DBD8D3" />
+
+        <Button
+            android:id="@+id/app_exit_sure_btn"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:background="#F0EFED"
+            android:text="确认"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</LinearLayout>

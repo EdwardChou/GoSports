@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dp_normal_large_size"
+    android:paddingRight="@dimen/dp_normal_large_size" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_large_size"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_middle_size" >
+
+        <ImageView
+            android:id="@+id/fragment_user_head_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_large_size"
+            android:src="@drawable/contact_head_01" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginBottom="@dimen/dp_small_size" >
+
+                <TextView
+                    android:id="@+id/fragment_user_name_tv"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:drawableLeft="@drawable/ic_males"
+                    android:text="Edward Chou"
+                    android:textSize="@dimen/font_middle" />
+
+                <ImageButton
+                    android:id="@+id/fragment_user_edit_profile_imbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/edit_profile_btn_bg" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/fragment_user_age_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_tel"
+                    android:text="25"
+                    android:textSize="@dimen/font_middle" />
+
+                <TextView
+                    android:id="@+id/fragment_user_email_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_normal_middle_size"
+                    android:drawableLeft="@drawable/ic_email"
+                    android:text="edwardchoujy@gmail.com"
+                    android:textSize="@dimen/font_middle" />
+            </LinearLayout>
+
+            <RatingBar
+                android:id="@+id/fragment_user_credit_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+                <!-- style="@style/rating_bar" -->
+
+            <TextView
+                android:id="@+id/fragment_user_description_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_small_size"
+                android:text="I am loved because I love. I am greatness no better or worse then any one else."
+                android:textSize="@dimen/font_middle" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_large_size"
+        android:background="@drawable/bg_block_white"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_unit_small" >
+
+        <RelativeLayout
+            android:id="@+id/fragment_user_launched_event_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dp_normal_large_size"
+            android:paddingLeft="@dimen/dp_normal_large_size"
+            android:paddingRight="@dimen/dp_normal_large_size"
+            android:paddingTop="@dimen/dp_normal_large_size" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Launched Events"
+                android:textSize="@dimen/font_normal" />
+        </RelativeLayout>
+
+        <include layout="@layout/view_divider_horizontal" />
+
+        <RelativeLayout
+            android:id="@+id/fragment_user_joined_events_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dp_normal_large_size"
+            android:paddingLeft="@dimen/dp_normal_large_size"
+            android:paddingRight="@dimen/dp_normal_large_size"
+            android:paddingTop="@dimen/dp_normal_large_size" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Joined Events"
+                android:textSize="@dimen/font_normal" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragment_user_me"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_normal_large_size"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_block_white"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_unit_small" >
+
+            <RelativeLayout
+                android:id="@+id/fragment_user_my_club_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dp_normal_large_size"
+                android:paddingLeft="@dimen/dp_normal_large_size"
+                android:paddingRight="@dimen/dp_normal_large_size"
+                android:paddingTop="@dimen/dp_normal_large_size" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="My Club"
+                    android:textSize="@dimen/font_normal" />
+
+                <TextView
+                    android:id="@+id/fragment_user_msg_unread_count"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="@dimen/dp_normal_small_size"
+                    android:background="@drawable/bg_new_message_count"
+                    android:gravity="center"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <include layout="@layout/view_divider_horizontal" />
+
+            <RelativeLayout
+                android:id="@+id/fragment_user_my_credit_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dp_normal_large_size"
+                android:paddingLeft="@dimen/dp_normal_large_size"
+                android:paddingRight="@dimen/dp_normal_large_size"
+                android:paddingTop="@dimen/dp_normal_large_size" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="My Credit"
+                    android:textSize="@dimen/font_normal" />
+            </RelativeLayout>
+
+            <include layout="@layout/view_divider_horizontal" />
+
+            <RelativeLayout
+                android:id="@+id/fragment_user_my_rating_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dp_normal_large_size"
+                android:paddingLeft="@dimen/dp_normal_large_size"
+                android:paddingRight="@dimen/dp_normal_large_size"
+                android:paddingTop="@dimen/dp_normal_large_size" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="My Rating"
+                    android:textSize="@dimen/font_normal" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_normal_large_size"
+            android:background="@drawable/bg_block_white"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_unit_small" >
+
+            <RelativeLayout
+                android:id="@+id/fragment_user_setting_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dp_normal_large_size"
+                android:paddingLeft="@dimen/dp_normal_large_size"
+                android:paddingRight="@dimen/dp_normal_large_size"
+                android:paddingTop="@dimen/dp_normal_large_size" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Setting"
+                    android:textSize="@dimen/font_normal" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

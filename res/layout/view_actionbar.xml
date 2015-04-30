@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="48dp"
+    android:background="@drawable/actionbar_bg" >
+
+    <ImageButton
+        android:id="@+id/actionbar_left_ibtn"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dp_normal_middle_size"
+        android:background="@drawable/ic_menu_white_36dp" />
+
+    <TextView
+        android:id="@+id/actionbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dp_normal_middle_size"
+        android:layout_toRightOf="@id/actionbar_left_ibtn"
+        android:text="@string/app_name"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/actionbar_right_btn"
+        android:layout_alignParentRight="true"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/dp_normal_middle_size"
+        android:background="#000000"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@+id/actionbar_right_ibtn"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/dp_normal_middle_size"
+        android:background="@drawable/ic_add_white_36dp"
+        android:layout_alignParentRight="true" />
+
+    <LinearLayout
+        android:id="@+id/actionbar_search_edt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/actionbar_right_ibtn"
+        android:visibility="gone" >
+
+        <include
+            layout="@layout/view_search_element" />
+    </LinearLayout>
+
+</RelativeLayout>

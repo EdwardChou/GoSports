@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_normal_large_size"
+        android:paddingLeft="@dimen/dp_normal_large_size"
+        android:paddingRight="@dimen/dp_normal_large_size"
+        android:paddingTop="@dimen/dp_normal_large_size" >
+
+        <ImageView
+            android:id="@+id/fragment_display_sports_title_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_normal_large_size"
+            android:src="@drawable/create_title_ima" />
+
+        <TextView
+            android:id="@+id/fragment_display_sports_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@+id/fragment_display_sports_title_iv"
+            android:ems="10"
+            android:text="..." >
+
+            <requestFocus />
+        </TextView>
+    </RelativeLayout>
+
+    <include layout="@layout/view_divider_horizontal" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_normal_large_size"
+        android:paddingLeft="@dimen/dp_normal_large_size"
+        android:paddingRight="@dimen/dp_normal_large_size"
+        android:paddingTop="@dimen/dp_normal_large_size" >
+
+        <ImageView
+            android:id="@+id/fragment_display_sports_type_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_normal_large_size"
+            android:src="@drawable/create_sport_ima" />
+
+        <TextView
+            android:id="@+id/fragment_display_sports_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_normal_large_size"
+            android:layout_toRightOf="@id/fragment_display_sports_type_iv"
+            android:text="Events"
+            android:textSize="@dimen/font_middle" />
+
+        <TextView
+            android:id="@+id/fragment_display_sports_type_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/fragment_display_sports_type"
+            android:gravity="center"
+            android:text="..."
+            android:textSize="@dimen/font_middle" />
+    </RelativeLayout>
+
+    <include layout="@layout/view_divider_horizontal" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_normal_large_size"
+        android:paddingLeft="@dimen/dp_normal_large_size"
+        android:paddingRight="@dimen/dp_normal_large_size"
+        android:paddingTop="@dimen/dp_normal_large_size" >
+
+        <ImageView
+            android:id="@+id/fragment_display_sports_time_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_normal_large_size"
+            android:src="@drawable/create_time_ima" />
+
+        <TextView
+            android:id="@+id/fragment_display_sports_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_normal_large_size"
+            android:layout_toRightOf="@id/fragment_display_sports_time_iv"
+            android:text="Time"
+            android:textSize="@dimen/font_middle" />
+
+        <TextView
+            android:id="@+id/fragment_display_sports_time_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/fragment_display_sports_time"
+            android:gravity="center"
+            android:text="..."
+            android:textSize="@dimen/font_middle" />
+    </RelativeLayout>
+
+    <include layout="@layout/view_divider_horizontal" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_normal_large_size"
+        android:paddingLeft="@dimen/dp_normal_large_size"
+        android:paddingRight="@dimen/dp_normal_large_size"
+        android:paddingTop="@dimen/dp_normal_large_size" >
+
+        <ImageView
+            android:id="@+id/fragment_display_sports_loc_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_normal_large_size"
+            android:src="@drawable/create_addr_ima" />
+
+        <TextView
+            android:id="@+id/fragment_display_sports_loc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_normal_large_size"
+            android:layout_toRightOf="@id/fragment_display_sports_loc_iv"
+            android:text="Location"
+            android:textSize="@dimen/font_middle" />
+
+        <TextView
+            android:id="@+id/fragment_display_sports_loc_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/fragment_display_sports_loc"
+            android:drawableRight="@drawable/huodongliebiao_22"
+            android:gravity="center"
+            android:text="..."
+            android:textSize="@dimen/font_middle" />
+    </RelativeLayout>
+
+    <include layout="@layout/view_divider_horizontal" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_normal_large_size"
+        android:paddingLeft="@dimen/dp_normal_large_size"
+        android:paddingRight="@dimen/dp_normal_large_size"
+        android:paddingTop="@dimen/dp_normal_large_size" >
+
+        <ImageView
+            android:id="@+id/fragment_display_sports_num_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_normal_large_size"
+            android:src="@drawable/faxian1_06" />
+
+        <TextView
+            android:id="@+id/fragment_display_sports_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_normal_large_size"
+            android:layout_toRightOf="@id/fragment_display_sports_num_iv"
+            android:text="Current / Expect"
+            android:textSize="@dimen/font_middle" />
+
+        <TextView
+            android:id="@+id/fragment_display_sports_num_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="4dp"
+            android:layout_toRightOf="@+id/fragment_display_sports_num"
+            android:ems="10"
+            android:gravity="center"
+            android:text="..." >
+        </TextView>
+    </RelativeLayout>
+
+    <include layout="@layout/view_divider_horizontal" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_normal_large_size"
+        android:paddingLeft="@dimen/dp_normal_large_size"
+        android:paddingRight="@dimen/dp_normal_large_size"
+        android:paddingTop="@dimen/dp_normal_large_size" >
+
+        <ImageView
+            android:id="@+id/fragment_display_sports_detail_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_normal_large_size"
+            android:src="@drawable/create_info_ima" />
+
+        <TextView
+            android:id="@+id/fragment_display_sports_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_normal_large_size"
+            android:layout_toRightOf="@id/fragment_display_sports_detail_iv"
+            android:text="Remarks"
+            android:textSize="@dimen/font_middle" />
+
+        <TextView
+            android:id="@+id/fragment_display_sports_remarks_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="4dp"
+            android:layout_toRightOf="@+id/fragment_display_sports_detail"
+            android:ems="10"
+            android:gravity="center"
+            android:text="..." >
+        </TextView>
+    </RelativeLayout>
+
+    <include layout="@layout/view_divider_horizontal" />
+
+    <CheckBox
+        android:id="@+id/fragment_display_sports_attend_ibtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_large_size"
+        android:background="@drawable/btn_attend"
+        android:button="@null"
+        android:checked="false" />
+
+</LinearLayout>
