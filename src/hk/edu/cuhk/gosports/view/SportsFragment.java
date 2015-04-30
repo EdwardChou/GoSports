@@ -84,6 +84,7 @@ public class SportsFragment extends BaseFragment implements Notify {
 	private ProgressDialog dialog;
 	private PullToRefreshListView refresh;
 
+	boolean locationMovableMode = true;
 	public static Marker latestNewMarker = null;
 	MainService mService;
 	private boolean mBound;
@@ -109,6 +110,10 @@ public class SportsFragment extends BaseFragment implements Notify {
 
 	public SportsFragment(Context Context) {
 		super(Context);
+	}
+
+	public void setLocationMode(boolean displaySelectionLocationMode) {
+		this.locationMovableMode = displaySelectionLocationMode;
 	}
 
 	@SuppressLint("HandlerLeak")
@@ -448,11 +453,14 @@ public class SportsFragment extends BaseFragment implements Notify {
 			Log.e(TAG, locData.latitude + "");
 			Log.e(TAG, locData.longitude + "");
 
-			LatLng ll = new LatLng(location.getLatitude(),
-					location.getLongitude());
-			selfll = new LatLng(location.getLatitude(), location.getLongitude());
-			MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
-			mBaiduMap.animateMapStatus(u);
+			if (locationMovableMode) {
+				LatLng ll = new LatLng(location.getLatitude(),
+						location.getLongitude());
+				selfll = new LatLng(location.getLatitude(),
+						location.getLongitude());
+				MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
+				mBaiduMap.animateMapStatus(u);
+			}
 		}
 
 		public void onReceivePoi(BDLocation poiLocation) {
@@ -494,6 +502,7 @@ public class SportsFragment extends BaseFragment implements Notify {
 		MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(new LatLng(
 				latitude, longtitude));
 		mBaiduMap.animateMapStatus(u);
+		setLocationMode(false);
 	}
 
 	public class MyOnMarkerClickListener implements OnMarkerClickListener {
@@ -626,6 +635,7 @@ public class SportsFragment extends BaseFragment implements Notify {
 				MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(selfll);
 				// mBaiduMap.setMapStatus(u);
 				mBaiduMap.animateMapStatus(u);
+				setLocationMode(true);
 				break;
 			case R.id.pull_refresh_list_btn:
 				if (NetworkUtil.isNetworkAvailable(getActivity())) {
