@@ -1,6 +1,5 @@
 package hk.edu.cuhk.gosports.view;
 
-import hk.edu.cuhk.gosports.MainActivity;
 import hk.edu.cuhk.gosports.R;
 import hk.edu.cuhk.gosports.utils.GSConstants;
 import hk.edu.cuhk.gosports.view.DefaultAlertDialog.DialogCallBack;

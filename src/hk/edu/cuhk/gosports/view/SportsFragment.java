@@ -1,6 +1,5 @@
 package hk.edu.cuhk.gosports.view;
 
-import hk.edu.cuhk.gosports.MainActivity;
 import hk.edu.cuhk.gosports.R;
 import hk.edu.cuhk.gosports.controller.SportsFragmentAdapter;
 import hk.edu.cuhk.gosports.model.Messager;
@@ -91,7 +90,7 @@ public class SportsFragment extends BaseFragment implements Notify {
 
 	LocationClient mLocClient;
 	public MyLocationListenner myListener = new MyLocationListenner();
-	private int type = -1;
+	// TODO private int type = -1;
 	BitmapDescriptor mCurrentMarker;
 
 	private InfoWindow mInfoWindow;
@@ -133,7 +132,9 @@ public class SportsFragment extends BaseFragment implements Notify {
 				if (messager.getStatus() == GSConstants.STATUS_OK) {
 					sports = (List<Sport>) messager.getObject();
 					for (Sport sport : sports) {
-						Log.e("ADD MAP POINT======", "longtitude="+sport.getLongitude()+",latitude="+sport.getLatitude());
+						Log.e("ADD MAP POINT======",
+								"longtitude=" + sport.getLongitude()
+										+ ",latitude=" + sport.getLatitude());
 						addMarkerOnMap(sport.getLongitude(),
 								sport.getLatitude(), sport.getSportType(),
 								sport.getSportID());
@@ -388,8 +389,9 @@ public class SportsFragment extends BaseFragment implements Notify {
 		public boolean onMapPoiClick(MapPoi arg0) {
 			return false;
 		}
-		
+
 	}
+
 	/**
 	 * view pager change listener
 	 * 
@@ -446,15 +448,11 @@ public class SportsFragment extends BaseFragment implements Notify {
 			Log.e(TAG, locData.latitude + "");
 			Log.e(TAG, locData.longitude + "");
 
-			if (isFirstLoc) {
-				isFirstLoc = false;
-				LatLng ll = new LatLng(location.getLatitude(),
-						location.getLongitude());
-				selfll = new LatLng(location.getLatitude(),
-						location.getLongitude());
-				MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
-				mBaiduMap.animateMapStatus(u);
-			}
+			LatLng ll = new LatLng(location.getLatitude(),
+					location.getLongitude());
+			selfll = new LatLng(location.getLatitude(), location.getLongitude());
+			MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
+			mBaiduMap.animateMapStatus(u);
 		}
 
 		public void onReceivePoi(BDLocation poiLocation) {
@@ -492,6 +490,12 @@ public class SportsFragment extends BaseFragment implements Notify {
 		}
 	}
 
+	public void moveToLocation(double latitude, double longtitude) {
+		MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(new LatLng(
+				latitude, longtitude));
+		mBaiduMap.animateMapStatus(u);
+	}
+
 	public class MyOnMarkerClickListener implements OnMarkerClickListener {
 		@Override
 		public boolean onMarkerClick(final Marker marker) {
@@ -499,8 +503,8 @@ public class SportsFragment extends BaseFragment implements Notify {
 			return true;
 		}
 	}
-	
-	private void popupButton (Marker marker) {
+
+	private void popupButton(Marker marker) {
 		final Button button = new Button(getContext());
 		button.setBackgroundResource(R.drawable.map_text);
 		button.setTextColor(Color.WHITE);
@@ -521,8 +525,7 @@ public class SportsFragment extends BaseFragment implements Notify {
 					context.switchMode(GSConstants.MENU_SPORT_ADD);
 				} else {
 					// detail page
-					context.switchMode(GSConstants.MENU_SPORT_DETAIL,
-							sportId);
+					context.switchMode(GSConstants.MENU_SPORT_DETAIL, sportId);
 				}
 				mBaiduMap.hideInfoWindow();
 			}
@@ -602,7 +605,6 @@ public class SportsFragment extends BaseFragment implements Notify {
 		mBaiduMap.setMapStatus(u);
 		return marker;
 	}
-	
 
 	public class MyOnClickListener implements OnClickListener {
 		@Override

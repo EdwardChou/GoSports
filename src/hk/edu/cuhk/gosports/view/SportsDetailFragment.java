@@ -1,6 +1,5 @@
 package hk.edu.cuhk.gosports.view;
 
-import hk.edu.cuhk.gosports.MainActivity;
 import hk.edu.cuhk.gosports.R;
 import hk.edu.cuhk.gosports.database.GSProvider;
 import hk.edu.cuhk.gosports.model.Messager;
@@ -14,7 +13,6 @@ import hk.edu.cuhk.gosports.utils.ViewUtil;
 
 import java.util.HashMap;
 
-import android.R.integer;
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Context;
@@ -48,6 +46,7 @@ public class SportsDetailFragment extends BaseFragment implements Notify {
 	CheckBox attend;
 	private boolean mBound;
 	MainService mService;
+	double latitude, longtitude;
 
 	// private static Notify sportFragmentNotify;
 
@@ -108,21 +107,9 @@ public class SportsDetailFragment extends BaseFragment implements Notify {
 		}
 	}
 
-	 public void setSportId(int sportId) {
-	 // if (mBound && sportId != -1) {
-	 // HashMap<String, Integer> taskParams = new HashMap<String, Integer>();
-	 // taskParams.put("advanceSearch", 1);
-	 // taskParams.put("sportId", sportId);
-	 // MainService.addNewTask(new Task(Task.LOAD_DETAIL_SPORTS,
-	 // taskParams, getContext()), SportsDetailFragment.this);
-	 // }
-		 this.sportId = sportId;
-		 refreshView();
-	 }
-
-	public static void addNotify(Context context) {
-		// FIXME delete or not
-		// sportFragmentNotify = (Notify) context;
+	public void setSportId(int sportId) {
+		this.sportId = sportId;
+		refreshView();
 	}
 
 	private void intiView(View v) {
@@ -149,18 +136,21 @@ public class SportsDetailFragment extends BaseFragment implements Notify {
 			GSProvider.init(context);
 			Sport sport = GSProvider.getInstance().getSport(sportId);
 			if (sport != null) {
+				latitude = sport.getLatitude();
+				longtitude = sport.getLongitude();
 				this.sportId = sport.getSportID();
-				title.setText(sport.getExtraInfo() == null ? "" : sport
-						.getExtraInfo());
+				title.setText(sport.getEventTitle());
 				type.setText(ViewUtil.getSportName(sport.getSportType()));
 				time.setText(sport.getStartTime());
 				location.setText(sport.getLocation());
 				number.setText(sport.getCurrentNum() + "/"
 						+ sport.getExpectNum());
+				remarks.setText(sport.getExtraInfo());
 				attend.setChecked(sport.isJoined());
 			}
 		}
 	}
+
 	@Override
 	public void init() {
 
@@ -220,7 +210,11 @@ public class SportsDetailFragment extends BaseFragment implements Notify {
 				}
 				break;
 			case R.id.fragment_display_sports_loc_tv:
-				// TODO change to sport fragment
+				if (latitude != 0.0) {
+					MainActivity activity = (MainActivity) getActivity();
+					activity.switchMode(GSConstants.MENU_DISPLAY_SPORT_ON_MAP,
+							latitude, longtitude);
+				}
 				break;
 			default:
 				break;

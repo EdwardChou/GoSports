@@ -1,20 +1,16 @@
-package hk.edu.cuhk.gosports;
+package hk.edu.cuhk.gosports.view;
 
+import hk.edu.cuhk.gosports.GSApplication;
+import hk.edu.cuhk.gosports.R;
 import hk.edu.cuhk.gosports.model.Messager;
 import hk.edu.cuhk.gosports.model.Notify;
 import hk.edu.cuhk.gosports.model.Task;
 import hk.edu.cuhk.gosports.utils.GSConstants;
-import hk.edu.cuhk.gosports.view.CreateSportsFragment;
-import hk.edu.cuhk.gosports.view.DefaultAlertDialog;
 import hk.edu.cuhk.gosports.view.DefaultAlertDialog.DialogCallBack;
-import hk.edu.cuhk.gosports.view.LoginActivity;
-import hk.edu.cuhk.gosports.view.SlidingLeftFragment;
-import hk.edu.cuhk.gosports.view.SportsDetailFragment;
-import hk.edu.cuhk.gosports.view.SportsFragment;
-import hk.edu.cuhk.gosports.view.UserFragment;
 
 import java.util.Date;
 
+import android.R.integer;
 import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
@@ -166,6 +162,26 @@ public class MainActivity extends SlidingFragmentActivity implements
 		this.switchMode(type, 0);
 	}
 
+	public void switchMode(int type, double latitude, double longtitude) {
+		switch (type) {
+		case GSConstants.MENU_DISPLAY_SPORT_ON_MAP:
+			switchContent(mContent, sportsFragment);
+			actionBarLeftBtn
+					.setBackgroundResource(R.drawable.ic_menu_white_36dp);
+			actionBarRightBtn
+					.setBackgroundResource(R.drawable.ic_add_white_36dp);
+			actionBarRightBtn.setVisibility(View.VISIBLE);
+			((SportsFragment) sportsFragment).pager.setCurrentItem(1);
+			((SportsFragment) sportsFragment).moveToLocation(latitude,
+					longtitude);
+			Mode = GSConstants.MENU_DISPLAY_SPORT_ON_MAP;
+			break;
+
+		default:
+			break;
+		}
+	}
+
 	public void switchMode(int type, int sportID) {
 		switch (type) {
 		case GSConstants.MENU_SPORT_LIST:
@@ -192,8 +208,9 @@ public class MainActivity extends SlidingFragmentActivity implements
 			if (sportDetailFragment == null) {
 				sportDetailFragment = new SportsDetailFragment(
 						getApplicationContext(), sportID);
-			} else {				
-				((SportsDetailFragment) sportDetailFragment).setSportId(sportID);
+			} else {
+				((SportsDetailFragment) sportDetailFragment)
+						.setSportId(sportID);
 			}
 			switchContent(mContent, sportDetailFragment);
 			actionBarLeftBtn
@@ -287,8 +304,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 	@Override
 	public void onLocationChanged(Location location) {
 		GSApplication.sportRequest.setLatitude(location.getLatitude());
-		GSApplication.sportRequest
-				.setLongitude(location.getLongitude());
+		GSApplication.sportRequest.setLongitude(location.getLongitude());
 	}
 
 	@Override

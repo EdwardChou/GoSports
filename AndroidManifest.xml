@@ -68,7 +68,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="hk.edu.cuhk.gosports.MainActivity" />
+        <activity android:name="hk.edu.cuhk.gosports.view.MainActivity" />
         <activity android:name="hk.edu.cuhk.gosports.view.RegisterActivity" />
         <activity android:name=".view.InputActivity" />
 

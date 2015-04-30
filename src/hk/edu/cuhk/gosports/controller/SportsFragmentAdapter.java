@@ -1,11 +1,11 @@
 package hk.edu.cuhk.gosports.controller;
 
-import hk.edu.cuhk.gosports.MainActivity;
 import hk.edu.cuhk.gosports.R;
 import hk.edu.cuhk.gosports.model.Messager;
 import hk.edu.cuhk.gosports.model.Sport;
 import hk.edu.cuhk.gosports.utils.GSConstants;
 import hk.edu.cuhk.gosports.utils.TaskDetailOperation;
+import hk.edu.cuhk.gosports.view.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,6 @@
 package hk.edu.cuhk.gosports.view;
 
 import hk.edu.cuhk.gosports.GSApplication;
-import hk.edu.cuhk.gosports.MainActivity;
 import hk.edu.cuhk.gosports.R;
 import hk.edu.cuhk.gosports.database.GSProvider;
 import hk.edu.cuhk.gosports.model.Messager;

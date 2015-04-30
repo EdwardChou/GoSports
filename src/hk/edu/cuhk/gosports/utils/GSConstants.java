@@ -128,5 +128,6 @@ public class GSConstants {
 	public static final int MENU_SPORT_SELECT_LOC = 4;
 	public static final int MENU_USER = 5;
 	public static final int MENU_DONE_ADD_RETURN_SPORT_LIST = 6;
+	public static final int MENU_DISPLAY_SPORT_ON_MAP = 7;
 
 }

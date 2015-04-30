@@ -322,16 +322,16 @@ public class TaskDetailOperation {
 			parameters.put("userid", GSApplication.sportRequest.getUserId()
 					+ "");
 			// parameters.put("geohash", sport.getGeoHash());
+			parameters.put("activity_name", sport.getEventTitle());
 			parameters.put("latitude", sport.getLatitude() + "");
 			parameters.put("longitude", sport.getLongitude() + "");
 			parameters.put("activity_start_time", sport.getStartTime());
 			parameters.put("sport_type", sport.getSportType() + "");
 			parameters.put("current_num", "1");
 			parameters.put("expected_num", sport.getExpectNum() + "");
-			parameters.put("extra_info", sport.getEventTitle());
+			parameters.put("extra_info", sport.getExtraInfo());
 			String result = HttpUtil.postRequest(GSConstants.URL_ADD_SPORTS,
 					parameters, context);
-			Log.e(TAG, "SubmitSports2Server=====result====" + result);
 			if (result != null) {
 				JSONObject object;
 				object = new JSONObject(result);
