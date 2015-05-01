@@ -10,7 +10,6 @@ import hk.edu.cuhk.gosports.view.DefaultAlertDialog.DialogCallBack;
 
 import java.util.Date;
 
-import android.R.integer;
 import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
@@ -74,14 +73,17 @@ public class MainActivity extends SlidingFragmentActivity implements
 			GSApplication.sportRequest.setUserId(GSApplication.user
 					.getUserServerId());
 		}
+
+		// initialize request conditions
+		// set the request radius range to 10km
 		GSApplication.sportRequest.setRange(10);
-		// TODO
 		GSApplication.sportRequest.setExpectTimeStart(new Date().getTime());
 		// retrieve one week events
 		GSApplication.sportRequest
 				.setExpectTimeEnd(new Date().getTime() + 7 * 24 * 3600000);
 		GSApplication.sportRequest.setLoadSportType(GSConstants.SPORT_TYPE_ALL);
 
+		// sliding menu user interface configuration
 		slidingMenu = getSlidingMenu();
 		slidingMenu.setShadowWidthRes(R.dimen.shadow_width);
 		slidingMenu.setShadowDrawable(R.drawable.sliding_menu_shadow);

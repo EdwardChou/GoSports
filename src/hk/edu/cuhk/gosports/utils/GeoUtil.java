@@ -11,20 +11,21 @@ package hk.edu.cuhk.gosports.utils;
 public class GeoUtil {
 
 	/**
-	 * @param lat
-	 * @param lon
-	 * @param raidus
-	 *            , unit:m
-	 * @return minLat,minLng,maxLat,maxLng
+	 * calculate the circle range of given latitude, longitude and radius
+	 * 
+	 * @param latitude
+	 * @param longitude
+	 * @param radius
+	 *            meters
+	 * @return minLatitude,minLongitude,maxLatitude,maxLongitude
 	 */
-	public static double[] getAround(double lat, double lon, int raidus) {
+	public static double[] getAround(double latitude, double longitude,
+			int radius) {
 
 		double PI = 3.1415926535898;
-		Double latitude = lat;
-		Double longitude = lon;
 
 		Double degree = (24901 * 1609) / 360.0;
-		double raidusMile = raidus;
+		double raidusMile = radius;
 
 		Double dpmLat = 1 / degree;
 		Double radiusLat = dpmLat * raidusMile;

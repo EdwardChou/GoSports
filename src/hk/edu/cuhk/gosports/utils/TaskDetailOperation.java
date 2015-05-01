@@ -31,10 +31,10 @@ public class TaskDetailOperation {
 	private static final String TAG = "TaskDetailOperation";
 
 	/**
-	 * register operation
+	 * register operation, retrieve account info from GSApplcaiton
 	 * 
 	 * @param context
-	 * @return Messager
+	 * @return {@link hk.edu.cuhk.gosports.model.Messager}
 	 */
 	public static Messager register(Context context) {
 		JSONObject para = new JSONObject();
@@ -52,7 +52,6 @@ public class TaskDetailOperation {
 				object = new JSONObject(result);
 				String status = object.getString("message");
 				if ("OK".equals(status)) {
-					// TODO server bug
 					GSApplication.user.setUserServerId(object.getJSONObject(
 							"output").getInt("userid"));
 					GSApplication.user.setLogin(true);
@@ -81,7 +80,7 @@ public class TaskDetailOperation {
 	 * login
 	 * 
 	 * @param context
-	 * @return Messager
+	 * @return {@link hk.edu.cuhk.gosports.model.Messager}
 	 */
 	public static Messager login(Context context) {
 		User user = GSProvider.getInstance().queryMyUser(true);
@@ -92,8 +91,8 @@ public class TaskDetailOperation {
 				JSONObject parameters = new JSONObject();
 				parameters.put("user_name", GSApplication.user.getUsername());
 				parameters.put("password", GSApplication.user.getPassword());
-				Log.e(TAG, "name=" + GSApplication.user.getUsername()
-						+ ",pass=" + GSApplication.user.getPassword());
+				// Log.e(TAG, "name=" + GSApplication.user.getUsername()
+				// + ",pass=" + GSApplication.user.getPassword());
 				String loginResult = HttpUtil.postRequest(
 						GSConstants.URL_LOGIN, parameters, context);
 				if (loginResult != null) {
@@ -145,7 +144,7 @@ public class TaskDetailOperation {
 	 * load sports from Internet
 	 * 
 	 * @param context
-	 * @return Messager
+	 * @return {@link hk.edu.cuhk.gosports.model.Messager}
 	 */
 	public static Messager LoadSportsFromNet(Context context) {
 		JSONObject parameters = new JSONObject();
@@ -165,13 +164,17 @@ public class TaskDetailOperation {
 							.getExpectTimeEnd()));
 			parameters.put("load_sport_type",
 					GSApplication.sportRequest.getLoadSportType() + "");
+			Log.e(TAG,
+					"LoadSportsFromNet() start time:"
+							+ parameters.getString("expect_time_start")
+							+ ",end time:"
+							+ parameters.getString("expect_time_end"));
 		} catch (JSONException e1) {
 			e1.printStackTrace();
 		}
 		Log.i(TAG, GSApplication.sportRequest.toString());
 		String result = HttpUtil.postRequest(GSConstants.URL_LOAD_SPORTS,
 				parameters, context);
-		Log.i(TAG, "result====" + result);
 		if (result != null) {
 			JSONObject object;
 			try {
@@ -230,11 +233,11 @@ public class TaskDetailOperation {
 	 * load sports from database
 	 * 
 	 * @param context
-	 * @return Messager
+	 * @return {@link hk.edu.cuhk.gosports.model.Messager}
 	 */
 
 	public static Messager LoadSportsFromDB(Context context) {
-		List<Sport> sports = GSProvider.getInstance().querySports();
+		List<Sport> sports = GSProvider.getInstance().getSports();
 		if (null != sports) {
 			return new Messager(Task.LOAD_DB_SPORTS, GSConstants.STATUS_OK,
 					sports);
@@ -244,17 +247,24 @@ public class TaskDetailOperation {
 	}
 
 	/**
-	 * load sports from database
+	 * load sports from database, only support single condition search
 	 * 
 	 * @param context
 	 * @param sportId
+	 *            if no need, set to -1
 	 * @param sportType
+	 *            if no need, set to -1
 	 * @param isCreator
+	 *            if no need, set to false
 	 * @param hasJoin
+	 *            if no need, set to false
 	 * @param longtitude
+	 *            if no need, set to 0.0
 	 * @param latitude
+	 *            if no need, set to 0.0
 	 * @param range
-	 * @return Messager
+	 *            if no need, set to 0.0
+	 * @return {@link hk.edu.cuhk.gosports.model.Messager}
 	 */
 	// FIXME task id
 	public static Messager LoadSportsFromDB(Context context, int sportId,
@@ -268,8 +278,8 @@ public class TaskDetailOperation {
 			}
 		}
 		if (sportType != -1) {
-			List<Sport> sports = GSProvider.getInstance().querySports(
-					GSConstants.COLUMN_SPORT_TYPE + "=?",
+			List<Sport> sports = GSProvider.getInstance().getSports(
+					GSConstants.COLUMN_EVENT_TYPE + "=?",
 					new String[] { sportType + "" });
 			if (null != sports) {
 				return new Messager(Task.LOAD_DETAIL_SPORTS,
@@ -277,7 +287,7 @@ public class TaskDetailOperation {
 			}
 		}
 		if (isCreator) {
-			List<Sport> sports = GSProvider.getInstance().querySports(
+			List<Sport> sports = GSProvider.getInstance().getSports(
 					GSConstants.COLUMN_IS_CREATOR + "=?",
 					new String[] { isCreator ? "1" : "0" });
 			if (null != sports) {
@@ -286,7 +296,7 @@ public class TaskDetailOperation {
 			}
 		}
 		if (hasJoin) {
-			List<Sport> sports = GSProvider.getInstance().querySports(
+			List<Sport> sports = GSProvider.getInstance().getSports(
 					GSConstants.COLUMN_IS_JOINED + "=?",
 					new String[] { hasJoin ? "1" : "0" });
 			if (null != sports) {
@@ -296,8 +306,8 @@ public class TaskDetailOperation {
 		}
 		if (range > 0.0) {
 			// TODO find a better way to calculate geo value
-			List<Sport> sports = GSProvider.getInstance().querySports(
-					GSConstants.COLUMN_SPORT_TYPE + "=?",
+			List<Sport> sports = GSProvider.getInstance().getSports(
+					GSConstants.COLUMN_EVENT_TYPE + "=?",
 					new String[] { sportType + "" });
 			if (null != sports) {
 				return new Messager(Task.LOAD_DETAIL_SPORTS,
@@ -314,7 +324,7 @@ public class TaskDetailOperation {
 	 * 
 	 * @param context
 	 * @param sport
-	 * @return Messager
+	 * @return {@link hk.edu.cuhk.gosports.model.Messager}
 	 */
 	public static Messager SubmitSports2Server(Context context, Sport sport) {
 		try {
@@ -367,9 +377,17 @@ public class TaskDetailOperation {
 				GSConstants.STATUS_FAIL, "Network error");
 	}
 
+	/**
+	 * join or quit events request
+	 * 
+	 * @param context
+	 * @param sportId
+	 * @param isJoin
+	 * @return {@link hk.edu.cuhk.gosports.model.Messager}
+	 */
 	public static Messager joinOrQuitEvent(Context context, int sportId,
 			boolean isJoin) {
-		List<Sport> queryResult = GSProvider.getInstance().querySports(
+		List<Sport> queryResult = GSProvider.getInstance().getSports(
 				GSConstants.COLUMN_EVENTS_ID + "=?",
 				new String[] { sportId + "" });
 		if (queryResult != null) {

@@ -27,7 +27,7 @@ import android.util.Log;
  */
 public class GSProvider {
 
-	private final String TAG = GSProvider.class.getSimpleName();
+	private final String TAG = "GSProvider";
 
 	private static GSHelper mGSHelper;
 	private SQLiteDatabase db;
@@ -37,6 +37,11 @@ public class GSProvider {
 		mGSHelper = new GSHelper(context);
 	}
 
+	/**
+	 * Singleton instance
+	 * 
+	 * @param context
+	 */
 	public static synchronized void init(Context context) {
 		if (instance == null) {
 			instance = new GSProvider(context);
@@ -56,7 +61,7 @@ public class GSProvider {
 	}
 
 	/**
-	 * basic insert, delete, query, update operation
+	 * basic insert, delete, query, update operation line start
 	 */
 	public int insertRecord(String table, String nullColumnHack,
 			ContentValues values) {
@@ -109,11 +114,22 @@ public class GSProvider {
 		return 0 == db.update(table, values, whereClause, whereArgs);
 	}
 
+	/**
+	 * line end
+	 */
+
+	/**
+	 * query user info from database
+	 * 
+	 * @param isLogin
+	 *            account
+	 * @return {@link hk.edu.cuhk.gosports.model.User}
+	 */
 	public User queryMyUser(boolean isLogin) {
 		User user = null;
 		Cursor cursor = queryRecord(GSConstants.TABLE_USER, null,
 				GSConstants.COLUMN_ISLOGIN + "=?", new String[] { "1" }, null,
-				null, null);
+				null, GSConstants.COLUMN_LOGIN_TIMESATMP + " desc");
 		if (null != cursor) {
 			if (cursor.moveToNext()) {
 				user = new User();
@@ -134,6 +150,13 @@ public class GSProvider {
 		return user;
 	}
 
+	/**
+	 * get sports from database
+	 */
+	public List<Sport> getSports() {
+		return getSports(null, null);
+	}
+
 	public Sport getSport(int sportId) {
 		Sport s = null;
 		Cursor cursor = queryRecord(GSConstants.TABLE_EVENTS, null,
@@ -144,11 +167,7 @@ public class GSProvider {
 		return s;
 	}
 
-	public List<Sport> querySports() {
-		return querySports(null, null);
-	}
-
-	public List<Sport> querySports(String selection, String[] selectionArgs) {
+	public List<Sport> getSports(String selection, String[] selectionArgs) {
 		List<Sport> result = null;
 		Cursor cursor = queryRecord(GSConstants.TABLE_EVENTS, null, selection,
 				selectionArgs, null, null, GSConstants.COLUMN_CREATE_TIME
@@ -209,9 +228,16 @@ public class GSProvider {
 		values.put(GSConstants.COLUMN_CREDIT, user.getCredit());
 		values.put(GSConstants.COLUMN_DESCRIPTION, user.getDescription());
 		values.put(GSConstants.COLUMN_ISLOGIN, user.isLogin());
+		values.put(GSConstants.COLUMN_LOGIN_TIMESATMP,
+				System.currentTimeMillis() + "");
 		return values;
 	}
 
+	/**
+	 * retrieve the cached sports serverId
+	 * 
+	 * @return id set
+	 */
 	public Set<Integer> getCachedSportServerIdSet() {
 		Set<Integer> cachedSportServerId = null;
 		Cursor cursor = queryRecord(GSConstants.TABLE_EVENTS,
@@ -227,12 +253,18 @@ public class GSProvider {
 		return cachedSportServerId;
 	}
 
+	/**
+	 * insert sport to database
+	 * 
+	 * @param sport
+	 * @param cachedSportServerId
+	 * @return insert status
+	 */
 	public boolean insertSports(Sport sport, Set<Integer> cachedSportServerId) {
 		if (null == sport) {
 			Log.i(TAG, "sports info is null !");
 			return false;
 		}
-		// FIXME
 		if (cachedSportServerId != null) {
 			if (cachedSportServerId.contains(sport.getSportServerID())) {
 				return false;
@@ -255,7 +287,7 @@ public class GSProvider {
 		values.put(GSConstants.COLUMN_LONGTITUDE, sport.getLongitude());
 		values.put(GSConstants.COLUMN_EXPECT_NUM, sport.getExpectNum());
 		values.put(GSConstants.COLUMN_CURRENT_NUM, sport.getCurrentNum());
-		values.put(GSConstants.COLUMN_SPORT_TYPE, sport.getSportType());
+		values.put(GSConstants.COLUMN_EVENT_TYPE, sport.getSportType());
 		values.put(GSConstants.COLUMN_START_TIME,
 				TimeUtil.transferDateToLong(sport.getStartTime()));
 		values.put(GSConstants.COLUMN_CREATE_TIME,

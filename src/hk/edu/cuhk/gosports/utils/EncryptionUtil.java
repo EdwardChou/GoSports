@@ -10,11 +10,12 @@ import javax.crypto.spec.SecretKeySpec;
 import android.annotation.SuppressLint;
 
 /**
+ * AES</p>
+ * 
  * Usage:
  * 
  * <pre>
  * String crypto = SimpleCrypto.encrypt(masterpassword, cleartext) 
- * ... 
  * String cleartext = SimpleCrypto.decrypt(masterpassword, crypto)
  * </pre>
  * 
@@ -22,6 +23,12 @@ import android.annotation.SuppressLint;
  */
 public class EncryptionUtil {
 
+	/**
+	 * default encrypt
+	 * 
+	 * @param cleartext
+	 * @return encrypted text
+	 */
 	public static String encrypt(String cleartext) {
 		try {
 			return encrypt("fedcba983210", cleartext);
@@ -31,6 +38,13 @@ public class EncryptionUtil {
 		return "";
 	}
 
+	/**
+	 * default decrypt
+	 * 
+	 * @param encrypted
+	 *            text
+	 * @return decrypted text
+	 */
 	public static String decrypt(String encrypted) {
 		try {
 			return decrypt("fedcba983210", encrypted);
@@ -40,6 +54,14 @@ public class EncryptionUtil {
 		return "";
 	}
 
+	/**
+	 * encrypt with customize seed
+	 * 
+	 * @param seed
+	 * @param cleartext
+	 * @return encrypted text
+	 * @throws Exception
+	 */
 	public static String encrypt(String seed, String cleartext)
 			throws Exception {
 		byte[] rawKey = getRawKey(seed.getBytes());
@@ -47,6 +69,14 @@ public class EncryptionUtil {
 		return toHex(result);
 	}
 
+	/**
+	 * decrypt with customize seed
+	 * 
+	 * @param seed
+	 * @param encrypted
+	 * @return decrypted text
+	 * @throws Exception
+	 */
 	public static String decrypt(String seed, String encrypted)
 			throws Exception {
 		byte[] rawKey = getRawKey(seed.getBytes());

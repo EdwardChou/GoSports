@@ -29,6 +29,12 @@ public class HttpUtil {
 
 	private static final String TAG = "HttpUtil";
 
+	/** 
+	 * @param url
+	 * @param parameters
+	 * @param context
+	 * @return
+	 */
 	public static String postRequest(String url, JSONObject parameters,
 			Context context) {
 		Log.i(TAG, TAG + " start post");

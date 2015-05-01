@@ -1,8 +1,7 @@
 package hk.edu.cuhk.gosports.utils;
 
-
 /**
- * constants of the app
+ * constants of the application
  * 
  * @author EdwardChou edwardchou_gmail_com
  * @date 2015-4-22 下午5:52:20
@@ -32,7 +31,7 @@ public class GSConstants {
 	public static final String COLUMN_LONGTITUDE = "longitude";
 	public static final String COLUMN_EXPECT_NUM = "expected_num";
 	public static final String COLUMN_CURRENT_NUM = "current_num";
-	public static final String COLUMN_SPORT_TYPE = "sport_type";
+	public static final String COLUMN_EVENT_TYPE = "sport_type";
 	public static final String COLUMN_START_TIME = "start_time";
 	public static final String COLUMN_CREATE_TIME = "create_time";
 	public static final String COLUMN_EXTRA_INFO = "extra_info";
@@ -51,6 +50,7 @@ public class GSConstants {
 	public static final String COLUMN_CREDIT = "credit";
 	public static final String COLUMN_DESCRIPTION = "description";
 	public static final String COLUMN_ISLOGIN = "is_login_account";
+	public static final String COLUMN_LOGIN_TIMESATMP = "login_timestamp";
 
 	// sql statement
 	public static final String SQL_CREATE_TABLE_EVENTS = "CREATE TABLE "
@@ -59,20 +59,20 @@ public class GSConstants {
 			+ " INTEGER," + COLUMN_TITLE + " TEXT," + COLUMN_LOCATION
 			+ " TEXT," + COLUMN_LATITUDE + " REAL," + COLUMN_LONGTITUDE
 			+ " REAL," + COLUMN_EXPECT_NUM + " INTEGER," + COLUMN_CURRENT_NUM
-			+ " INTEGER," + COLUMN_SPORT_TYPE + " INTEGER," + COLUMN_START_TIME
-			+ " TEXT," + COLUMN_CREATE_TIME + " TEXT,"
-			+ COLUMN_EXTRA_INFO + " TEXT," + COLUMN_IS_CREATOR + " INTEGER,"
-			+ COLUMN_IS_JOINED + " INTEGER)";
+			+ " INTEGER," + COLUMN_EVENT_TYPE + " INTEGER," + COLUMN_START_TIME
+			+ " TEXT," + COLUMN_CREATE_TIME + " TEXT," + COLUMN_EXTRA_INFO
+			+ " TEXT," + COLUMN_IS_CREATOR + " INTEGER," + COLUMN_IS_JOINED
+			+ " INTEGER)";
 	public static final String SQL_CREATE_TABLE_MY_EVENTS = "CREATE TABLE "
 			+ TABLE_MY_EVENTS + "(evid INTEGER PRIMARY KEY autoincrement,"
 			+ COLUMN_SEVER_EVENT_ID + " INTEGER," + COLUMN_CREATOR
 			+ " INTEGER," + COLUMN_TITLE + " TEXT," + COLUMN_LOCATION
 			+ " TEXT," + COLUMN_LATITUDE + " REAL," + COLUMN_LONGTITUDE
 			+ " REAL," + COLUMN_EXPECT_NUM + " INTEGER," + COLUMN_CURRENT_NUM
-			+ " INTEGER," + COLUMN_SPORT_TYPE + " INTEGER," + COLUMN_START_TIME
-			+ " TEXT," + COLUMN_CREATE_TIME + " TEXT,"
-			+ COLUMN_EXTRA_INFO + " TEXT," + COLUMN_IS_CREATOR + " INTEGER,"
-			+ COLUMN_IS_JOINED + " INTEGER)";
+			+ " INTEGER," + COLUMN_EVENT_TYPE + " INTEGER," + COLUMN_START_TIME
+			+ " TEXT," + COLUMN_CREATE_TIME + " TEXT," + COLUMN_EXTRA_INFO
+			+ " TEXT," + COLUMN_IS_CREATOR + " INTEGER," + COLUMN_IS_JOINED
+			+ " INTEGER)";
 	public static final String SQL_CREATE_TABLE_CREDIT = "CREATE TABLE "
 			+ TABLE_CREDIT + "(crid INTEGER PRIMARY KEY autoincrement,"
 			+ COLUMN_EVENTS_ID + " INTEGER," + COLUMN_FROM_USER_ID
@@ -88,7 +88,7 @@ public class GSConstants {
 			+ COLUMN_AGE + " INTEGER," + COLUMN_SEX + " INTEGER,"
 			+ COLUMN_MAILBOX + " TEXT," + COLUMN_CREATE_TIME + " INTEGER,"
 			+ COLUMN_CREDIT + " REAL," + COLUMN_DESCRIPTION + " TEXT,"
-			+ COLUMN_ISLOGIN + " INTEGER)";
+			+ COLUMN_ISLOGIN + " INTEGER," + COLUMN_LOGIN_TIMESATMP + " TEXT)";
 
 	public static final int MALE = 0;
 	public static final int FEMALE = 1;
@@ -116,19 +116,21 @@ public class GSConstants {
 	public static final String URL_ADD_SPORTS = "http://52.68.117.95/create_activity.php";
 	public static final String URL_JOIN_SPORTS = "http://52.68.117.95/join_activity.php";
 	public static final String URL_QUIT_SPORTS = "http://52.68.117.95/quit_activity.php";
+	public static final String URL_DELETE_USER = "http://52.68.117.95/delete_activity.php";
+	public static final String URL_EDIT_USER = "http://52.68.117.95/edit_user.php";
 
 	public static final int STATUS_OK = 0;
 	public static final int STATUS_FAIL = 1;
 	public static final int STATUS_ERROR = 2;
-	
+
 	public static final int MENU_SPORT_LIST = 0;
 	public static final int MENU_SPORT_MAP = 1;
 	public static final int MENU_SPORT_DETAIL = 2;
-	public static final int MENU_SPORT_ADD = 3;
-	public static final int MENU_SPORT_SELECT_LOC = 4;
-	public static final int MENU_USER = 5;
-	public static final int MENU_DONE_ADD_RETURN_SPORT_LIST = 6;
-	public static final int MENU_DISPLAY_SPORT_ON_MAP = 7;
-	public static final int MENU_SELECT_FROM_MAP_AND_ADD = 8;
+	public static final int MENU_DISPLAY_SPORT_ON_MAP = 3;
+	public static final int MENU_SPORT_ADD = 4;
+	public static final int MENU_SELECT_FROM_MAP_AND_ADD = 5;
+	public static final int MENU_SPORT_SELECT_LOC = 6;
+	public static final int MENU_DONE_ADD_RETURN_SPORT_LIST = 7;
+	public static final int MENU_USER = 8;
 
 }
