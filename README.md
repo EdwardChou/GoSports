@@ -4,6 +4,8 @@ Android LBS application, planning doing sports among your friends with one app
 
 Location Based Social Application for people within similar location area to arrange interested sport activities during similar time period
 
+[APK Download](https://github.com/EdwardChou/Gosports/raw/master/Gosports_v0.1.apk "GoSport v0.1")
+
 # Functionalities
 
 Display events in list or on map
