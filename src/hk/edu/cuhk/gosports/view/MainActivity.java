@@ -237,6 +237,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 				((CreateSportsFragment) createSportFragment).doneSelect();
 			}
 			switchMode(GSConstants.MENU_SPORT_ADD);
+			Mode = GSConstants.MENU_SELECT_FROM_MAP_AND_ADD;
 			break;
 		case GSConstants.MENU_SPORT_SELECT_LOC:
 			switchContent(mContent, sportsFragment);
@@ -305,10 +306,15 @@ public class MainActivity extends SlidingFragmentActivity implements
 						Task.ADD_NEW_SPORT_TO_SERVER, GSConstants.STATUS_OK,
 						null));
 				switchMode(GSConstants.MENU_SPORT_ADD);
+			} else if (Mode == GSConstants.MENU_SELECT_FROM_MAP_AND_ADD) {
+				if (createSportFragment == null) {
+					createSportFragment = new CreateSportsFragment(
+							getApplicationContext());
+				} else {
+					((CreateSportsFragment) createSportFragment).doneSelect();
+				}
+				switchMode(GSConstants.MENU_SPORT_ADD);
 			}
-			break;
-		default:
-			break;
 		}
 	}
 

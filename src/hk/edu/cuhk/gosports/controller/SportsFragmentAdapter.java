@@ -89,8 +89,7 @@ public class SportsFragmentAdapter extends BaseAdapter {
 
 		final Sport sport = getItem(position);
 		holder.user_name.setText(sport.getCreateUserID() + "");
-		// FIXME
-		holder.event_title.setText(sport.getExtraInfo());
+		holder.event_title.setText(sport.getEventTitle());
 		holder.join_num.setText(sport.getCurrentNum() + "");
 		holder.start_time.setText(sport.getStartTime());
 		holder.location.setText(sport.getLocation());
@@ -99,7 +98,8 @@ public class SportsFragmentAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				MainActivity activity = (MainActivity) context;
-				activity.switchMode(GSConstants.MENU_SPORT_MAP, sport.getSportID());
+				activity.switchMode(GSConstants.MENU_SPORT_MAP,
+						sport.getSportID());
 			}
 		});
 
@@ -108,7 +108,8 @@ public class SportsFragmentAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				MainActivity activity = (MainActivity) context;
-				activity.switchMode(GSConstants.MENU_SPORT_DETAIL, sport.getSportID());
+				activity.switchMode(GSConstants.MENU_SPORT_DETAIL,
+						sport.getSportID());
 			}
 		});
 

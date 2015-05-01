@@ -56,11 +56,13 @@
                 android:visibility="gone" />
         </RelativeLayout>
     </LinearLayout>
+    <!-- android.support.v4.view.ViewPager -->
+    <!-- hk.edu.cuhk.gosports.view.StaticViewPager -->
 
-    <android.support.v4.view.ViewPager
+    <hk.edu.cuhk.gosports.view.StaticViewPager
         android:id="@+id/sports_fragment_viewpage"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
-    </android.support.v4.view.ViewPager>
+    </hk.edu.cuhk.gosports.view.StaticViewPager>
 
 </LinearLayout>

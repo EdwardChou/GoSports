@@ -76,7 +76,8 @@ public class SportsFragment extends BaseFragment implements Notify {
 
 	private static final String TAG = "SportsFragment";
 
-	public ViewPager pager;
+	// public StaticViewPager pager;
+	public StaticViewPager pager;
 	private ImageView leftCursor, rightCursor;
 	private List<View> views;
 
@@ -84,7 +85,7 @@ public class SportsFragment extends BaseFragment implements Notify {
 	private ProgressDialog dialog;
 	private PullToRefreshListView refresh;
 
-	boolean isFirstLocate = false;
+	boolean isFirstLocate = true;
 	public static Marker latestNewMarker = null;
 	MainService mService;
 	private boolean mBound;
@@ -100,13 +101,12 @@ public class SportsFragment extends BaseFragment implements Notify {
 	LatLng selfll;
 
 	/**
-	 * 当前地点击点
+	 * current point
 	 */
 	private LatLng currentPt;
 
 	MapView mMapView;
 	BaiduMap mBaiduMap;
-	boolean isFirstLoc = true;// 是否首次定位
 
 	public SportsFragment(Context Context) {
 		super(Context);
@@ -133,9 +133,9 @@ public class SportsFragment extends BaseFragment implements Notify {
 				if (messager.getStatus() == GSConstants.STATUS_OK) {
 					sports = (List<Sport>) messager.getObject();
 					for (Sport sport : sports) {
-						Log.e("ADD MAP POINT======",
-								"longtitude=" + sport.getLongitude()
-										+ ",latitude=" + sport.getLatitude());
+						// Log.e("ADD MAP POINT======",
+						// "longtitude=" + sport.getLongitude()
+						// + ",latitude=" + sport.getLatitude());
 						addMarkerOnMap(sport.getLongitude(),
 								sport.getLatitude(), sport.getSportType(),
 								sport.getSportID());
@@ -182,7 +182,7 @@ public class SportsFragment extends BaseFragment implements Notify {
 					Context.BIND_AUTO_CREATE);
 		}
 
-		pager = (ViewPager) v.findViewById(R.id.sports_fragment_viewpage);
+		pager = (StaticViewPager) v.findViewById(R.id.sports_fragment_viewpage);
 		TextView leftTitle = (TextView) v
 				.findViewById(R.id.sports_fragment_left_title);
 		TextView rightTitle = (TextView) v
@@ -249,10 +249,10 @@ public class SportsFragment extends BaseFragment implements Notify {
 			getContext().unbindService(mConnection);
 			mBound = false;
 		}
-		// 退出时销毁定位
+		// stop location client when fragment destroys
 		mLocClient.stop();
 		// bdA.recycle();
-		// 关闭定位图层
+		// close location layer
 		mBaiduMap.setMyLocationEnabled(false);
 		// mMapView.onDestroy();
 		if (mMapView != null)
@@ -341,7 +341,7 @@ public class SportsFragment extends BaseFragment implements Notify {
 
 	private void prepareMap(View view) {
 		Log.i(TAG, "prepareMap() start");
-		// 初始化界面（按钮）
+		// initialize
 		requestLocButton = (ImageButton) view
 				.findViewById(R.id.fragment_map_type_btn);
 		requestLocButton.setOnClickListener(new MyOnClickListener());
@@ -350,20 +350,20 @@ public class SportsFragment extends BaseFragment implements Notify {
 				.findViewById(R.id.fragment_map_my_position_btn);
 		positionButton.setOnClickListener(new MyOnClickListener());
 
-		// 地图初始化
+		// map initialize
 		mMapView = (MapView) view.findViewById(R.id.fragment_map_bmapview);
 		mBaiduMap = mMapView.getMap();
 		MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(14.0f);
 		mBaiduMap.setMapStatus(msu);
 
-		// 开启定位图层
+		// open location layer
 		mBaiduMap.setMyLocationEnabled(true);
-		// 定位初始化
+		// location initialize
 		mLocClient = new LocationClient(getContext());
 		mLocClient.registerLocationListener(myListener);
 		LocationClientOption option = new LocationClientOption();
-		option.setOpenGps(true);// 打开gps
-		option.setCoorType("bd09ll"); // 设置坐标类型
+		option.setOpenGps(true);// turn on gps
+		option.setCoorType("bd09ll"); // set coordinate type
 		option.setScanSpan(10000);
 		mLocClient.setLocOption(option);
 		mLocClient.start();
@@ -372,10 +372,10 @@ public class SportsFragment extends BaseFragment implements Notify {
 		// load sport from database and add to map view
 		handler.sendEmptyMessage(1);
 
-		// 地图长按响应事件
+		// map long click listener
 		mBaiduMap.setOnMapLongClickListener(new MyOnMapLongClickListener());
 		mBaiduMap.setOnMapClickListener(new MyOnMapClickListener());
-		// marker图标的响应事件
+		// marker click listener
 		mBaiduMap.setOnMarkerClickListener(new MyOnMarkerClickListener());
 	}
 
@@ -397,7 +397,7 @@ public class SportsFragment extends BaseFragment implements Notify {
 	 * view pager change listener
 	 * 
 	 * @author EdwardChou edwardchou_gmail_com
-	 * @date 2015-4-22 下午4:07:50
+	 * @date 2015-4-22 PM4:07:50
 	 * @version V1.0
 	 * 
 	 */
@@ -430,19 +430,19 @@ public class SportsFragment extends BaseFragment implements Notify {
 	 * location SDK listener
 	 * 
 	 * @author EdwardChou edwardchou_gmail_com
-	 * @date 2015-4-26 下午4:34:25
+	 * @date 2015-4-26 PM4:34:25
 	 * @version V1.0
 	 * 
 	 */
 	public class MyLocationListenner implements BDLocationListener {
 
 		public void onReceiveLocation(BDLocation location) {
-			// map view 销毁后不在处理新接收的位置
+			// wont't receive location when map view destroy
 			if (location == null || mMapView == null)
 				return;
 			MyLocationData locData = new MyLocationData.Builder()
 					.accuracy(location.getRadius())
-					// 此处设置开发者获取到的方向信息，顺时针0-360
+					// set direction, clockwise 0-360 degrees
 					.direction(100).latitude(location.getLatitude())
 					.longitude(location.getLongitude()).build();
 			mBaiduMap.setMyLocationData(locData);
@@ -468,7 +468,7 @@ public class SportsFragment extends BaseFragment implements Notify {
 	 * map long click listener, when long click, add new marker on map
 	 * 
 	 * @author EdwardChou edwardchou_gmail_com
-	 * @date 2015-4-26 下午5:14:53
+	 * @date 2015-4-26 PM5:14:53
 	 * @version V1.0
 	 * 
 	 */
@@ -631,7 +631,6 @@ public class SportsFragment extends BaseFragment implements Notify {
 				}
 				isFirstLocate = true;
 				MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(selfll);
-				// mBaiduMap.setMapStatus(u);
 				mBaiduMap.animateMapStatus(u);
 				break;
 			case R.id.pull_refresh_list_btn:
