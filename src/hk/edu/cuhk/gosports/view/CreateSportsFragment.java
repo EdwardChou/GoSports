@@ -125,10 +125,6 @@ public class CreateSportsFragment extends BaseFragment implements Notify {
 		timeButton.setText(TimeUtil.transferDateToString(new Date()));
 		locButton = (Button) v
 				.findViewById(R.id.fragment_create_sports_loc_btn);
-		if (SportsFragment.latestNewMarker != null) {
-			locButton.setVisibility(View.GONE);
-			locEditText.setVisibility(View.VISIBLE);
-		}
 		typeButton.setOnClickListener(new mOnClickListener());
 		timeButton.setOnClickListener(new mOnClickListener());
 		locButton.setOnClickListener(new mOnClickListener());
@@ -148,15 +144,19 @@ public class CreateSportsFragment extends BaseFragment implements Notify {
 
 	}
 
+	public void doneSelect() {
+		if (SportsFragment.latestNewMarker != null && locButton != null) {
+			locButton.setVisibility(View.GONE);
+			locEditText.setVisibility(View.VISIBLE);
+		}
+	}
+
 	@Override
 	public void refresh(Object... params) {
 		Messager msg = (Messager) params[0];
 		if (msg != null) {
 			if (msg.getType() == Task.DONE_SELECT_LOC) {
-				if (SportsFragment.latestNewMarker != null) {
-					locButton.setVisibility(View.GONE);
-					locEditText.setVisibility(View.VISIBLE);
-				}
+				doneSelect();
 			}
 			if (msg.getType() == Task.DONE_ADD_NEW_SPORT_TO_SERVER) {
 				if (msg.getStatus() == GSConstants.STATUS_OK) {

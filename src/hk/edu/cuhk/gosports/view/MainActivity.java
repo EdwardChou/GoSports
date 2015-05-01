@@ -227,6 +227,15 @@ public class MainActivity extends SlidingFragmentActivity implements
 			actionBarRightBtn.setVisibility(View.VISIBLE);
 			Mode = GSConstants.MENU_SPORT_ADD;
 			break;
+		case GSConstants.MENU_SELECT_FROM_MAP_AND_ADD:
+			if (createSportFragment == null) {
+				createSportFragment = new CreateSportsFragment(
+						getApplicationContext());
+			} else {
+				((CreateSportsFragment) createSportFragment).doneSelect();
+			}
+			switchMode(GSConstants.MENU_SPORT_ADD);
+			break;
 		case GSConstants.MENU_SPORT_SELECT_LOC:
 			switchContent(mContent, sportsFragment);
 			actionBarLeftBtn

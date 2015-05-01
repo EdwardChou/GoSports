@@ -84,7 +84,7 @@ public class SportsFragment extends BaseFragment implements Notify {
 	private ProgressDialog dialog;
 	private PullToRefreshListView refresh;
 
-	boolean locationMovableMode = true;
+	boolean isFirstLocate = false;
 	public static Marker latestNewMarker = null;
 	MainService mService;
 	private boolean mBound;
@@ -110,10 +110,6 @@ public class SportsFragment extends BaseFragment implements Notify {
 
 	public SportsFragment(Context Context) {
 		super(Context);
-	}
-
-	public void setLocationMode(boolean displaySelectionLocationMode) {
-		this.locationMovableMode = displaySelectionLocationMode;
 	}
 
 	@SuppressLint("HandlerLeak")
@@ -453,13 +449,14 @@ public class SportsFragment extends BaseFragment implements Notify {
 			Log.e(TAG, locData.latitude + "");
 			Log.e(TAG, locData.longitude + "");
 
-			if (locationMovableMode) {
+			if (isFirstLocate) {
 				LatLng ll = new LatLng(location.getLatitude(),
 						location.getLongitude());
 				selfll = new LatLng(location.getLatitude(),
 						location.getLongitude());
 				MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
 				mBaiduMap.animateMapStatus(u);
+				isFirstLocate = false;
 			}
 		}
 
@@ -502,7 +499,6 @@ public class SportsFragment extends BaseFragment implements Notify {
 		MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(new LatLng(
 				latitude, longtitude));
 		mBaiduMap.animateMapStatus(u);
-		setLocationMode(false);
 	}
 
 	public class MyOnMarkerClickListener implements OnMarkerClickListener {
@@ -513,7 +509,7 @@ public class SportsFragment extends BaseFragment implements Notify {
 		}
 	}
 
-	private void popupButton(Marker marker) {
+	private void popupButton(final Marker marker) {
 		final Button button = new Button(getContext());
 		button.setBackgroundResource(R.drawable.map_text);
 		button.setTextColor(Color.WHITE);
@@ -531,7 +527,8 @@ public class SportsFragment extends BaseFragment implements Notify {
 				MainActivity context = (MainActivity) getActivity();
 				if (isNew) {
 					// add new activity
-					context.switchMode(GSConstants.MENU_SPORT_ADD);
+					context.switchMode(GSConstants.MENU_SELECT_FROM_MAP_AND_ADD);
+					latestNewMarker = marker;
 				} else {
 					// detail page
 					context.switchMode(GSConstants.MENU_SPORT_DETAIL, sportId);
@@ -632,10 +629,10 @@ public class SportsFragment extends BaseFragment implements Notify {
 				if (selfll == null) {
 					return;
 				}
+				isFirstLocate = true;
 				MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(selfll);
 				// mBaiduMap.setMapStatus(u);
 				mBaiduMap.animateMapStatus(u);
-				setLocationMode(true);
 				break;
 			case R.id.pull_refresh_list_btn:
 				if (NetworkUtil.isNetworkAvailable(getActivity())) {
